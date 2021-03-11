@@ -16,7 +16,7 @@ public class Kick extends BaseCommand{
   @Override
   public boolean execute(MessageCreateEvent event, String[] args) {
     if(!event.isServerMessage()){
-      event.getChannel().sendMessage("This is a server-only feature!");
+      event.getChannel().sendMessage("You need to be in a server for this command to work!");
       return false;
     }
 
