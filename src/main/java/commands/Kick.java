@@ -21,7 +21,7 @@ public class Kick extends BaseCommand{
     }
 
     if(args[0].equals("")){
-      event.getChannel().sendMessage("You have to include who you want to kick!!");
+      event.getChannel().sendMessage("You have to include who you want to kick!");
       return false;
     }
     List<User> mentionUsers = Util.getMention(event, args);
