@@ -54,7 +54,7 @@ public class Kick extends BaseCommand{
           event.getChannel().sendMessage(new EmbedBuilder()
                   .setTimestampToNow()
                   .setTitle("Kicked!")
-                  .setDescription("Kicked **" + user.getDiscriminatedName() + "** for the reason " + sendReason + ", could "+(flag?"not":"") + "DM them.")
+                  .setDescription("Kicked **" + user.getDiscriminatedName() + "** for  " + sendReason + ", could "+(flag?"not":"") + "DM them.")
                   .setColor(Color.blue)
           );
         }else{
