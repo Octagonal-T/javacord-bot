@@ -3,6 +3,7 @@ package commands;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.entity.user.User;
+import org.javacord.api.exception.CannotMessageUserException;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class Kick extends BaseCommand{
     }
     List<User> mentionUsers = Util.getMention(event, args);
     if(mentionUsers.isEmpty()){
-      event.getChannel().sendMessage("You have to include who you want to kick!!");
+      event.getChannel().sendMessage("I can't find user "+args[0]+".");
       return false;
     }
     User user = mentionUsers.get(0);
@@ -37,11 +38,23 @@ public class Kick extends BaseCommand{
           for (int i = 1; i < args.length; i++) {
             reason.append(" ").append(args[i]);
           }
+          boolean flag = true;
+          String sendReason = !reason.toString().equals("") ? reason.toString() : "none";
+          try {
+            user.sendMessage(new EmbedBuilder()
+                    .setTimestampToNow()
+                    .setTitle("Kicked!")
+                    .setDescription("You have been kicked from **" + event.getServer().get().getName() + "** for the reason **" + sendReason + "**")
+                    .setColor(Color.blue)
+            ).join();
+          }catch(Exception e){
+            flag=false;
+          }
           server.kickUser(user, reason.toString().trim());
           event.getChannel().sendMessage(new EmbedBuilder()
                   .setTimestampToNow()
                   .setTitle("Kicked!")
-                  .setDescription("Kicked " + user.getDiscriminatedName() + " for the reason " + (!reason.toString().equals("") ? reason.toString() : "no reason"))
+                  .setDescription("Kicked **" + user.getDiscriminatedName() + "** for the reason " + sendReason + ", could "+(flag?"not":"") + "DM them.")
                   .setColor(Color.blue)
           );
         }else{
