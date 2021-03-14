@@ -13,7 +13,7 @@ public class Bot {
             .setAllIntents()
             .login().join();
     bot.updateStatus(UserStatus.IDLE);
-    bot.updateActivity(ActivityType.COMPETING, "In life");
+    bot.updateActivity(ActivityType.COMPETING, "Finishing by the end of March!");
     bot.addListener(new MessageHandler(Constants.commands));
   }
 }
