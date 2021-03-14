@@ -9,6 +9,7 @@ public class Constants {
     commands.put("ping", new Ping(commands));
     commands.put("help", new Help(commands));
     commands.put("kick", new Kick(commands));
+    commands.put("ban", new Ban(commands));
   }
 
 }
